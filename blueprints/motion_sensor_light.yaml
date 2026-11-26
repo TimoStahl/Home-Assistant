@@ -55,12 +55,6 @@ blueprint:
           unit_of_measurement: seconds
           mode: slider
           step: 1.0
-    time_default_end:
-      name: Only run default action before this time (Optional)
-      description: Default Light target will only run when time is earlier than this time value.
-      default: 00:00:00
-      selector:
-        time: {}
     elevation:
       name: Elevation
       description: Choose whether to check if the sun is above, below the horizon, or always trigger the action
@@ -127,8 +121,6 @@ action:
             entity_id: !input luminance_sensor
             below: !input luminance_required
         sequence:
-          - condition: time
-            before: !input time_default_end
           - service: light.turn_on
             target: !input light_target
       - conditions:
